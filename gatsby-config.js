@@ -4,10 +4,16 @@ module.exports = {
     subtitle: `FrontEnd developer`,
     description: `Do what you love.`,
     author: `SeungHyun Kim`,
+    siteUrl: `https://devhyunni.netlify.app`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        sitemapSize: 5000,
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
