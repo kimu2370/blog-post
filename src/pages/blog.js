@@ -13,20 +13,21 @@ const Content = styled.div`
 `;
 
 const ArticleDate = styled.h5`
-    display: inline;
     color: #606060;
+    opacity: 0.5;
 `;
 
 const Tags = styled.div`
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     align-items: center;
-    margin: 0.3rem auto;
+    flex-wrap: wrap;
     > a {
         background-color: rgba(139, 183, 245, 0.5);
         text-decoration: none;
         padding: 0 1rem;
         border-radius: 1rem;
+        margin-bottom: 0.5rem;
     }
     > a:not(:last-child) {
         margin-right: 0.5rem;
@@ -51,7 +52,6 @@ const IndexPage = ({ data }) => {
                         return date < new Date();
                     })
                     .map(({ node }) => {
-                        console.log("node >>>>", node);
                         return (
                             <div key={node.id}>
                                 <StyledLink
