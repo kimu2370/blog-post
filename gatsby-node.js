@@ -41,6 +41,7 @@ exports.createPages = ({ graphql, actions }) => {
                             path
                             draft
                             date
+                            tags
                         }
                         fields {
                             slug
@@ -58,6 +59,7 @@ exports.createPages = ({ graphql, actions }) => {
             .forEach(({ node }) => {
                 createPage({
                     path: node.frontmatter.path,
+                    tags: node.frontmatter.tags,
                     component: blogPostTemplate,
                     slug: node.fields.slug,
                     context: {},

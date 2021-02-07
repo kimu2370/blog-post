@@ -2,8 +2,8 @@
 title: "useState의 함수적 갱신이 마음대로 작동 안되는 이유"
 date: "2020-02-07"
 draft: false
-path: "/blog/example-title"
-tag: ["TIL", "useState"]
+path: "/blog/post-1"
+tags: ["TIL", "useState"]
 ---
 
 React hook의 **useState 함수적 갱신**을 사용하면서 해결했던 문제에 대해서 글을 써보려 한다.
@@ -48,7 +48,7 @@ checkbox를 클릭했을 때 list안의 해당 index의 값이 업데이트 되�
 항상 공식 문서를 먼저 찾아보는 편이여서 쉽게 찾을 수 있었다.
 react [공식 홈페이지](https://ko.reactjs.org/docs/hooks-reference.html#functional-updates)에는 다음과 같은 내용이 있었다.
 
-![](images/2021-02-07-13-50-00.png)
+![](https://images.velog.io/images/kimu2370/post/2352cce4-6c8c-4053-98aa-75e588bee499/image.png)
 
 여기서 중요한 점은
 
@@ -72,6 +72,7 @@ arr === prevCheckedList // true; -> React doesn't work
 // modified code
 
 ...
+
 prevCheckedList = [...arr];
 
 arr === prevCheckedList // false; -> React do work

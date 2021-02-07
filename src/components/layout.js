@@ -13,6 +13,7 @@ import styled from "@emotion/styled";
 import Header from "./header";
 import "./layout.css";
 
+const Container = styled.div``;
 const Content = styled.div`
     margin: 0 auto;
     max-width: 860px;
@@ -45,7 +46,7 @@ const Layout = ({ children }) => (
             }
         `}
         render={(data) => (
-            <>
+            <Container>
                 <Header siteTitle={data.site.siteMetadata.title} />
                 <Content>
                     <main>{children}</main>
@@ -63,7 +64,7 @@ const Layout = ({ children }) => (
                         </GatsbyLink>
                     </Footer>
                 </Content>
-            </>
+            </Container>
         )}
     />
 );

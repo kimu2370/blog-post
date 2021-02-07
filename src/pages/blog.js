@@ -17,20 +17,26 @@ const ArticleDate = styled.h5`
     color: #606060;
 `;
 
-const MarkerHeader = styled.h3`
-    display: inline;
-    border-radius: 1em 0 1em 0;
-    background-image: linear-gradient(
-        -100deg,
-        rgba(255, 250, 150, 0.15),
-        rgba(255, 250, 150, 0.8) 100%,
-        rgba(255, 250, 150, 0.25)
-    );
+const Tags = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.3rem auto;
+    > a {
+        background-color: rgba(139, 183, 245, 0.5);
+        text-decoration: none;
+        padding: 0 1rem;
+        border-radius: 1rem;
+    }
+    > a:not(:last-child) {
+        margin-right: 0.5rem;
+    }
 `;
 
-const ReadingTime = styled.h5`
-    display: inline;
-    color: #606060;
+const StyledLink = styled(Link)`
+    :hover {
+        color: #8bb7f5;
+    }
 `;
 
 const IndexPage = ({ data }) => {
@@ -38,35 +44,41 @@ const IndexPage = ({ data }) => {
         <Layout>
             <SEO title="Blog" />
             <Content>
-                <h1>Blog</h1>
                 {data.allMarkdownRemark.edges
                     .filter(({ node }) => {
                         const rawDate = node.frontmatter.rawDate;
                         const date = new Date(rawDate);
                         return date < new Date();
                     })
-                    .map(({ node }) => (
-                        <div key={node.id}>
-                            <Link
-                                to={node.frontmatter.path}
-                                css={css`
-                                    text-decoration: none;
-                                    color: inherit;
-                                `}
-                            >
-                                <MarkerHeader>
-                                    {node.frontmatter.title}
-                                </MarkerHeader>
-                            </Link>
-                            <div>
-                                <ArticleDate>
-                                    {node.frontmatter.date}
-                                </ArticleDate>
-                                <ReadingTime />
+                    .map(({ node }) => {
+                        console.log("node >>>>", node);
+                        return (
+                            <div key={node.id}>
+                                <StyledLink
+                                    to={node.frontmatter.path}
+                                    css={css`
+                                        text-decoration: none;
+                                        color: inherit;
+                                    `}
+                                >
+                                    <h2>{node.frontmatter.title}</h2>
+                                </StyledLink>
+                                <div>
+                                    <ArticleDate>
+                                        {node.frontmatter.date}
+                                    </ArticleDate>
+                                    <Tags>
+                                        {node.frontmatter.tags.map(
+                                            (item, idx) => (
+                                                <a key={idx}>{`${item}`}</a>
+                                            )
+                                        )}
+                                    </Tags>
+                                </div>
+                                <p>{node.excerpt}</p>
                             </div>
-                            <p>{node.excerpt}</p>
-                        </div>
-                    ))}
+                        );
+                    })}
             </Content>
         </Layout>
     );
@@ -94,12 +106,10 @@ export const query = graphql`
                         date(formatString: "YYYY년 MM월 DD일")
                         rawDate: date
                         path
+                        tags
                     }
                     fields {
                         slug
-                        readingTime {
-                            text
-                        }
                     }
                     excerpt
                 }
