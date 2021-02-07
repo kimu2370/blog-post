@@ -12,5 +12,5 @@ require("prismjs/plugins/line-numbers/prism-line-numbers.css");
 // nunito 서체
 
 exports.onInitialClientRender = () => {
-  require("typeface-nunito");
+    require("typeface-nunito");
 };
