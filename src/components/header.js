@@ -35,8 +35,6 @@ const NavLink = styled(Link)`
     }
 `;
 
-const GitHubLink = styled(NavLink)``;
-
 const HomeLink = styled(NavLink)`
     margin-left: 0;
 `;
@@ -54,9 +52,7 @@ const Header = ({ siteTitle }) => (
             <p>
                 <HomeLink to="/">{siteTitle}</HomeLink>
                 <NavLink to="/blog">Blog</NavLink>
-                <GitHubLink href="https://github.com/kimu2370">
-                    GitHub
-                </GitHubLink>
+                <NavLink to="https://github.com/kimu2370">GitHub</NavLink>
             </p>
         </Content>
     </SiteHeader>

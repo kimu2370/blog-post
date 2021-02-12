@@ -1,10 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
+import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
+
+const ripple = keyframes`
+    from, 20%, 53%, 80%, to {
+        transform: translateY(0);
+    }
+
+    40%, 43% {
+        transform: translateY(-10px);
+    }
+
+    70% {
+        transform: translateY(-5px);
+    }
+
+    90% {
+        transform: translateY(-2px);
+    }
+`;
 
 const Container = styled.div`
     text-align: center;
+    cursor: pointer;
+    border-radius: 20px;
 `;
 
 const OuterContainer = styled.div`
@@ -28,9 +49,10 @@ const NameHeader = styled.h1`
 
 const Description = styled.p`
     margin-top: 3rem;
+    animation: ${ripple} 1s ease infinite;
 `;
 
-const LandingBio = () => (
+const LandingBio = ({ theme }) => (
     <StaticQuery
         query={graphql`
             query LandingSiteTitleQuery {
@@ -45,7 +67,7 @@ const LandingBio = () => (
         `}
         render={(data) => (
             <OuterContainer>
-                <Container>
+                <Container theme={theme}>
                     <NameHeader>{data.site.siteMetadata.title}</NameHeader>
                     <SubTitle>{data.site.siteMetadata.subtitle}</SubTitle>
                     <Description>{`" ${data.site.siteMetadata.description} "`}</Description>
